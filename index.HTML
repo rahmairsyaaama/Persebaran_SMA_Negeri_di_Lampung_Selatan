@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Persebaran SMA Negeri di Lampung Selatan</title>
+
+  <link rel="stylesheet" href="css/leaflet.css"/>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-brand">WebGIS · Lampung Selatan</div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#author-profile">Profil Pembuat</a></li>
+      <li><a href="#map-data">Map Data</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <div class="logo-row">
+        <img src="assets/unila.png" alt="Logo Universitas Lampung" />
+        <div class="logo-divider"></div>
+        <img src="assets/fkip.png" alt="Logo FKIP Unila" />
+    </div>
+    <div class="header-badge">Pendidikan Geografi · FKIP Unila</div>
+    <h1>Persebaran SMA Negeri<br/>di Lampung Selatan</h1>
+    <p class="sub">Pemetaan Interaktif berbasis Web GIS · 2026</p>
+  </header>
+
+  <section id="home">
+    <div class="section-label">
+      <span>Pengantar</span>
+    </div>
+    <div class="pengantar-box">
+      Web GIS ini menyajikan informasi spasial mengenai lokasi Sekolah Menengah Atas (SMA) Negeri
+      yang tersebar di wilayah Kabupaten Lampung Selatan, Provinsi Lampung. Pemetaan ini bertujuan
+      untuk membantu analisis jangkauan dan distribusi layanan pendidikan menengah atas di wilayah
+      tersebut, sehingga dapat menjadi referensi bagi pemangku kepentingan dalam perencanaan
+      pendidikan yang lebih merata dan berkeadilan.
+    </div>
+  </section>
+
+  <div class="stats-grid">
+    <div class="stat-card" onclick="document.getElementById('map-data').scrollIntoView({behavior: 'smooth'})" style="cursor: pointer;">
+      <div class="stat-icon">🏫</div>
+      <div class="stat-number">19</div>
+      <div class="stat-label">Total SMA Negeri</div>
+    </div>
+    <div class="stat-card" onclick="document.getElementById('map-data').scrollIntoView({behavior: 'smooth'})" style="cursor: pointer;">
+      <div class="stat-icon">📍</div>
+      <div class="stat-number">17</div>
+      <div class="stat-label">Kecamatan Tersebar</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">🗓️</div>
+      <div class="stat-number" style="font-size:1.3rem;">Mei 2026</div>
+      <div class="stat-label">Pembaruan Data</div>
+    </div>
+  </div>
+
+  <section id="author-profile">
+    <div class="section-label">
+      <span>Profil Pembuat</span>
+    </div>
+    <div class="profile-card">
+      <div class="profile-photo-wrapper">
+        <img src="assets/Rahma.jpeg" alt="Foto Rahma Irsya Hulwana" class="profile-photo" />
+      </div>
+      <div class="profile-info">
+        <h3>Rahma Irsya Hulwana</h3>
+        <div class="profile-tag">Peminatan Pemetaan 2023</div>
+        
+        <table class="biodata-table">
+          <tr>
+            <td class="label">NPM</td>
+            <td class="value">: 2313034012</td>
+          </tr>
+          <tr>
+            <td class="label">Program Studi</td>
+            <td class="value">: Pendidikan Geografi</td>
+          </tr>
+          <tr>
+            <td class="label">Fakultas / Kampus</td>
+            <td class="value">: FKIP / Universitas Lampung</td>
+          </tr>
+          <tr>
+            <td class="label">Tempat, Tgl Lahir</td>
+            <td class="value">: Bandar Lampung, 05 September 2005</td>
+          </tr>
+        </table>
+
+        <div class="profile-bio">
+          "Saya adalah mahasiswi Pendidikan Geografi Universitas Lampung angkatan 2023 yang mengambil kefokusan di bidang Peminatan Pemetaan. Memiliki ketertarikan besar dalam dunia pendidikan, analisis spasial, dan pemanfaatan Sistem Informasi Geografis (SIG) untuk menyajikan data bumi secara informatif dan estetis. Saya percaya bahwa literasi spasial adalah kunci untuk memahami dunia yang terus berubah."
+        </div>
+
+        <div class="profile-links">
+          <a href="mailto:rahmairsyaaama@gmail.com" class="btn-contact btn-email">📧 Kirim Email</a>
+          <a href="https://instagram.com/rahmairsya" target="_blank" class="btn-contact btn-ig">📸 @rahmairsya</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="map-data">
+    <div class="section-label">
+      <span>Peta Interaktif</span>
+    </div>
+    <h2>Sebaran Lokasi SMA Negeri</h2>
+    <p class="map-desc">Klik marker pada peta atau gunakan fitur pencarian di bawah untuk menemukan sekolah.</p>
+    
+    <div class="search-container" style="margin-bottom: 15px; display: flex; gap: 10px; max-width: 100%;">
+      <input type="text" id="search-input" placeholder="🔍 Masukkan nama SMA (Contoh: SMAN 1 Natar)..." style="flex: 1; padding: 12px 16px; border: 2px solid var(--hijau-terang); border-radius: 8px; font-family: inherit; font-size: 0.9rem; outline: none; background: white;" />
+      <button id="search-btn" style="background: var(--hijau-mid); color: white; border: none; padding: 0 20px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.9rem; transition: background 0.2s;">Cari</button>
+    </div>
+
+    <div id="map"></div>
+  </section>
+
+  <section id="about">
+    <div class="section-label">
+      <span>Tentang</span>
+    </div>
+    <div class="about-box">
+      <div class="about-icon">🎓</div>
+      <div>
+        <h3>Tentang Proyek Ini</h3>
+        <p>
+          Proyek Web GIS ini dikembangkan sebagai bagian dari mata kuliah
+          <strong style="color:white;">Perencanaan Web GIS</strong>, Program Studi Pendidikan Geografi,
+          Fakultas Keguruan dan Ilmu Pendidikan (FKIP), Universitas Lampung.
+          Data titik lokasi sekolah bersumber dari Portal Satu Data Lampung - Dinas Pendidikan dan Kebudayaan Provinsi Lampung,
+          divisualisasikan menggunakan teknologi Leaflet.js dan format data GeoJSON.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <strong>Web GIS Persebaran SMA Negeri Lampung Selatan</strong>
+    <div class="footer-divider"></div>
+    Program Studi Pendidikan Geografi<br/>
+    Fakultas Keguruan dan Ilmu Pendidikan · Universitas Lampung<br/>
+    2026
+    <p class="sumber">Sumber data: Portal Satu Data Lampung - Dinas Pendidikan dan Kebudayaan Provinsi Lampung · Visualisasi: Leaflet.js · Data format: GeoJSON</p>
+    <p>Sumber Data: <a href="https://rmd.lampungprov.go.id/data-sekolah/list/18.01?type=sma" target="_blank" style="color:var(--aksen-emas); text-decoration:none;">Portal Satu Data Lampung</a></p>
+  </footer>
+
+  <script src="js/leaflet.js"></script>
+
+  <script src="js/map.js"></script>
+
+</body>
+</html>
